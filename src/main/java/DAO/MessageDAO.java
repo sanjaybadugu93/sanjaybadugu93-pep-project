@@ -13,8 +13,6 @@ import java.util.List;
 
 
 public class MessageDAO {
-     
-    //private static PreparedStatement preparedStatement;
 
     public Message createMessage(Message msg){
         Connection con=ConnectionUtil.getConnection();
@@ -111,7 +109,6 @@ public Message deleteBymessageId(int messageId){
        }
         return null;
     }
-    
 //update by message id
 public void updateMessageById(int id,Message msg){
     Connection con=ConnectionUtil.getConnection();
