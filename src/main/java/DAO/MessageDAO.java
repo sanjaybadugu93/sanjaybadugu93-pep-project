@@ -112,7 +112,7 @@ public Message deleteBymessageId(int messageId){
        }
         return null;
     }
-    //update by message id
+    
 //update by message id
 public void updateMessageById(int id,Message msg){
     Connection con=ConnectionUtil.getConnection();
