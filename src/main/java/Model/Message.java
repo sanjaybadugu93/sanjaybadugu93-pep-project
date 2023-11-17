@@ -139,4 +139,10 @@ public class Message {
                 ", time_posted_epoch=" + time_posted_epoch +
                 '}';
     }
+    public static Message getmessagesByMessageId(int message_id2) {
+        return null;
+    }
+    public static Message updateByMessageId(int message_id2, Message msg) {
+        return msg;
+    }
 }
