@@ -74,8 +74,7 @@ public Message deleteBymessageId(int messageId){
             String sql = "select * from Message ";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            //write preparedStatement's setInt method here.
-            // preparedStatement.setInt(1, book.getBooksWithBookCountOverZero());
+
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 Message message= new Message(rs.getInt("message_id"),
