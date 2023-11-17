@@ -51,22 +51,23 @@ public class AccountService {
     //  * key was already in use.)
     //  */
     
-     public Account getUserByUserName(Account acc)
+     public Account getUserByUserName(String string)
       {
-        if(AccountDAO.isUsernameAvailable(acc)){
+        if(string==null)
+        {
             return null;
         }
         
-        return AccountDAO.getAccountByUsername(acc);
+        return AccountDAO.getAccountByUsername(string);
       }
 
 
-     public Account addAccount(Account acc) {
+     public Account createAccount(Account acc) {
         if(acc==null)
         {
             return null;
         }
-         return AccountDAO.addAccount(acc);
+         return AccountDAO.createAccount(acc);
      }
     // public Account getUserByUserName(Account acc, String username) {
     //     return AccountDAO.getAccountByUsername(username);

@@ -13,7 +13,7 @@ import Model.Account;
  import Util.ConnectionUtil;
 
  public class AccountDAO {  
-     public Account addAccount(Account account){
+     public Account createAccount(Account account){
          Connection con=ConnectionUtil.getConnection();
      try
      {
@@ -47,7 +47,8 @@ import Model.Account;
              ResultSet rs=ps.executeQuery();
             while(rs.next())
              {
-                 return new Account(rs.getInt("account_id"),rs.getString("username"),rs.getString("password"));
+                Account ac= new Account(rs.getInt("account_id"),rs.getString("username"),rs.getString("password"));
+                return ac;
              }
             }
          catch(SQLException e)
@@ -57,17 +58,18 @@ import Model.Account;
          return null;
      }
   //retrive account by username
-  public Account getAccountByUsername(Account acc) { 
+  public Account getAccountByUsername(String name) { 
      Connection con=ConnectionUtil.getConnection();
      try
      {
          String sql="select * from Account where username=(?)"; 
          PreparedStatement ps=con.prepareStatement (sql); 
-         ps.setString(1, Account.acc);
+         ps.setString(1, name);
          ResultSet rs=ps.executeQuery();
          while(rs.next())
          {
-         return new Account (rs.getInt("account_id"), rs.getString("username"),rs.getString("password"));
+         Account account=new Account (rs.getInt("account_id"), rs.getString("username"),rs.getString("password"));
+         return account;
          } 
      }
      catch (Exception e) 
@@ -76,26 +78,27 @@ import Model.Account;
      }
      return null;
      }
-}     
-     //retrive account by password
-     //  public Account getAccountByPassword(String name) { 
-     // Connection con=ConnectionUtil.getConnection();
-//     // try
-//     // {
-//     //     String sql="select * from Account where Password=(?)"; 
-//     //     PreparedStatement ps=con.prepareStatement (sql); 
-//     //     ps.setString(1, name);
-//     //     ResultSet rs=ps.executeQuery();
-//     //     while(rs.next())
-//     //     {
-//     //     return new Account (rs.getInt("account_id"), rs.getString("username"),rs.getString("password"));
-//     //     } 
-//     // }
-//     // catch (Exception e) 
-//     // {
-//     //      System.out.println(e.getMessage());
-//     // }
-//     // return null;
+    
+    //retrieve account by id
+public Account getAccountByUserId(int id){
+    Connection con=ConnectionUtil.getConnection();
+    try {
+        String sql="select * from account where username=(?)";
+        PreparedStatement ps=con.prepareStatement(sql);
+        ps.setInt(1,id);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next())
+        {
+           Account account=new Account(rs.getInt("account_id"),rs.getString("username"),rs.getString("password"));
+            return account;
+        }
+        
+    } catch (Exception e) {
+        System.out.println(e.getMessage()); 
+   }
+    return null;
+}
+}
  
  
 // public class AccountDAO {

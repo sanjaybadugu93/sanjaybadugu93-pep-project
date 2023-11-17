@@ -42,62 +42,31 @@ public class MessageService {
     }
    
     
-    public Message addMessage(Message message) 
+    public Message createMessage(Message message) 
     {
-        if(MessageDAO.getMessagesByMessageId(0)!=null)
-        {
-           return MessageDAO.addMessage(message);
-        }
+         if(MessageDAO.getMessagesByMessageId(1)!=null)
+         {
+            return MessageDAO.createMessage(message);
+         }
         return null;
+        // return createMessage(message);
     }
    
 
     public Message updateByMessageId(int message_id,Message msg)
      {
-        Message existingMessage = MessageDAO.getMessagesByMessageId(message_id);
-
-        // Check if the message exists
-        if (existingMessage == null) {
-            // Message not found
-            return null;  // updatemessagemessagenotfound
+        if(MessageDAO.getMessagesByMessageId(message_id)!=null){
+            MessageDAO.updateMessageById(message_id, msg);
+        return MessageDAO.getMessagesByMessageId(message_id);
         }
-       return  Message.updateByMessageId(message_id,msg);
+        return null;
     }
 
-    //     Message updatedMessage;
-    //     // Check if the updated message text is not blank and not too long
-    //     String newMessageText = updatedMessage.getMessage_text();
-    //     if (newMessageText == null || newMessageText.trim().isEmpty()) {
-    //         return null;  // updatemessagemessagestringempty
-    //     }
-
-    //     if (newMessageText.length() > 255) {
-    //         return null;  // updatemessagemessagetoolong
-    //     }
-
-    //    // Update the message text
-    //    existingMessage.setMessage_text(newMessageText);
-
-    //    // Update the message in the database
-    //    boolean updateSuccessful = MessageDAO.updateByMessageId(existingMessage);
-
-    //    if (updateSuccessful) {
-    //        return existingMessage;  // updatemessagesuccessful
-    //    } else {
-    //        return null;  // Handle update failure if necessary
-    //    }
-        // return ((DAO.MessageDAO) MessageDAO).updateByMessageId(,message_id,msg);
-    //     if(message_id==0){
-    //         return null;
-    //     }
-    //    return MessageDAO.updateByMessageId(message_id,msg);
-      // return msg;
     
-
 
     public Message deleteMessageByMessageId(int message_id)
     {
-        return MessageDAO.deleteMessageByMessageId(message_id);
+        return MessageDAO.deleteBymessageId(message_id);
     }
 
 

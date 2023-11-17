@@ -16,8 +16,8 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 /**
- * TODO: You will need to write your own endpoints and handlers for your controller. The endpoints you will need can be
- * found in readme.md as well as the test cases. You should
+ * 
+ * found in readme.md as well as the test cases. You shouldTODO: You will need to write your own endpoints and handlers for your controller. The endpoints you will need can be
  * refer to prior mini-project labs and lecture materials for guidance on how a controller may be built.
  */
 public class SocialMediaController {
@@ -41,7 +41,7 @@ public class SocialMediaController {
     }
     AccountService AccountService;
     MessageService MessageService;
-    private Object username;
+    // private Object username;
 
     public SocialMediaController(){
         this.AccountService=new AccountService();
@@ -64,12 +64,13 @@ public class SocialMediaController {
       else if(acc.getPassword().length() <4){
            ctx.status(400);
            return;
-         }else if (AccountService.getUserByUserName(acc)!=null)
+         }
+         else if (AccountService.getUserByUserName(acc.getUsername())!=null)
          {
            ctx.status(400);
            return;
          }
-        Account addedUser=AccountService.addAccount(acc);
+        Account addedUser=AccountService.createAccount(acc);
         ctx.json(om.writeValueAsString(addedUser));
         ctx.status(200); //OK
         System.out.println((addedUser));
@@ -80,7 +81,7 @@ public class SocialMediaController {
     {
         ObjectMapper om=new ObjectMapper();
         Account acc=om.readValue(ctx.body(),Account.class);
-        Account verifyUser=AccountService.getUserByUserName(acc);           
+        Account verifyUser=AccountService.getUserByUserName(acc.getUsername());           
          if(verifyUser==null)
         {
           ctx.status(401);
@@ -100,20 +101,19 @@ public class SocialMediaController {
 
     private void newMessageHandler(Context ctx) throws JsonMappingException, JsonProcessingException{
         ObjectMapper om=new ObjectMapper();
-        Message msg=om.readValue(ctx.body(),Message.class);
-        MessageDAO md=new MessageDAO();
-        if(md.isExist(msg.posted_by) && !msg.message_text.isBlank() && msg.message_text.length()< 255)
-        {
-            Message addedMsg=MessageService.addMessage(msg);
+     Message msg=om.readValue(ctx.body(),Message.class);
+     MessageDAO md=new MessageDAO();
+     if(md.isExist(msg.posted_by) && !msg.message_text.isBlank() && msg.message_text.length()< 255)
+     {
+            Message addedMsg=MessageService.createMessage(msg);
             ctx.json(addedMsg);
             ctx.status(200);
-        }
-        else
-        {
-           ctx.status(400);
-           return;
-        }
-    }
+            }
+          else{
+               ctx.status(400);
+                return;
+              }
+   }
 
 
     private void getAllMessagesHandler(Context ctx)
@@ -142,8 +142,8 @@ public class SocialMediaController {
 
     private void deleteMessageByMessageId(Context ctx) 
     {
-        int messageId=ctx.pathParamAsClass("message_id", Integer.class).get();
-        Message to_be_deleted_message=MessageService.deleteMessageByMessageId(messageId);
+        int message_id=ctx.pathParamAsClass("message_id", Integer.class).get();
+        Message to_be_deleted_message=MessageService.deleteMessageByMessageId(message_id);
         if(to_be_deleted_message !=null)
         {
             ctx.status(400);
