@@ -1,6 +1,5 @@
 package Service;
 
-import DAO.AccountDAO;
 import DAO.MessageDAO;
 // import Model.Account;
 import Model.Message;
@@ -12,20 +11,10 @@ import java.util.List;
 public class MessageService {
     public  MessageDAO MessageDAO;
 
-    /**
-     * No-args constructor for bookService which creates a BookDAO.
-     * There is no need to change this constructor.
-     */
     public MessageService(){
         MessageDAO = new MessageDAO();
     }
-    /**
-     * Constructor for a BookService when a BookDAO is provided.
-     * This is used for when a mock BookDAO that exhibits mock behavior is used in the test cases.
-     * This would allow the testing of BookService independently of BookDAO.
-     * There is no need to modify this constructor.
-     * @param bookDAO
-     */
+    
     public MessageService(MessageDAO MessageDAO){
         this.MessageDAO = MessageDAO;
     }

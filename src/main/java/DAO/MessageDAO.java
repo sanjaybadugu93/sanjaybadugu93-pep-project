@@ -1,14 +1,14 @@
 package DAO;
 
 import Util.ConnectionUtil;
-// import Model.Account;
+
 import Model.Message;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class MessageDAO {
         return null;
     }
 
-    private PreparedStatement preparedStatement;
+    
 
 
 //delete a message from the message table, identified by its message_id.

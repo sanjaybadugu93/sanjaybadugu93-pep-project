@@ -69,13 +69,7 @@ public class AccountService {
         }
          return AccountDAO.createAccount(acc);
      }
-    // public Account getUserByUserName(Account acc, String username) {
-    //     return AccountDAO.getAccountByUsername(username);
-    // }
-
-  
     
-    //  */
    
 
 }
